@@ -15,23 +15,34 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="105*"/>
+            <RowDefinition Height="175*"/>
+            <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="学籍番号" FontSize="20" Grid.Row="0" Grid.Column="0"/>
         <TextBlock Text="氏名" FontSize="20" Grid.Row="0" Grid.Column="1"/>
         <ComboBox FontSize="20" Grid.Row="1" Grid.Column="0" Margin="5" Name="Sort"/>
         <Button x:Name="Search" Content="検索" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="10"/>
         <TextBox x:Name="SearchTxt" Grid.Row="1" Grid.Column="2" FontSize="20" Margin="10" />
-        <Button x:Name="Sinkituika" Content="新規追加" Grid.Row="1" Grid.Column="5" FontSize="20" Margin="10" />
+        <Button x:Name="Sinkituika" Content="新規追加" Grid.Row="1" Grid.Column="4" FontSize="20" Margin="10" Click="Sinkituika_Click"/>
         <ComboBox x:Name="Activity" Grid.Row="2" Grid.Column="1" Margin="10" />
         <GroupBox Grid.Row="2" Grid.Column="2">
-            <CheckBox x:Name="Briefing" Content="説明会" FontSize="10" />
+            <StackPanel>
+                <CheckBox x:Name="Briefing" Content="説明会" FontSize="15" />
+                <CheckBox x:Name="Intern" Content="合同企業説明会" FontSize="15"/>
+                <CheckBox x:Name="Mensetu" Content="面接" FontSize="15"/>
+                <CheckBox x:Name="Test" Content="筆記" FontSize="15"/>
+                <CheckBox x:Name="Offer" Content="内定後" FontSize="15"/>
+            </StackPanel>
+
         </GroupBox>
-        <DataGrid x:Name="Itiran" Grid.Row="3" Grid.Column="0"/>
+        <DataGrid x:Name="Itiran" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5"/>
+        <Button x:Name="Edit" Content="編集" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="2"/>
+        <Button x:Name="Torikesi" Content="取消" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="3"/>
+        <Button x:Name="Rogout" Content="ログアウト" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="4" Click="Rogout_Click"/>
+
 
     </Grid>
 </Window>

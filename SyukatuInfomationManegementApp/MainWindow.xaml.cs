@@ -24,5 +24,28 @@ namespace SyukatuInfomationManegementApp
         {
             InitializeComponent();
         }
+
+        //新規追加ボタンイベントハンドラ
+        private void Sinkituika_Click(object sender, RoutedEventArgs e)
+        {
+            NewAddShow();
+        }
+
+        private static void NewAddShow()
+        {
+            NewAdd newAdd = new NewAdd(); //新規追加画面インスタンス作成
+            newAdd.Show(); //表示
+        }
+
+        private void Rogout_Click(object sender, RoutedEventArgs e)
+        {
+            Loginshow();
+        }
+
+        private static void Loginshow()
+        {
+            Login login = new Login();
+            login.Show();
+        }
     }
 }
