@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SyukatuInfomationManegementApp"
         mc:Ignorable="d"
-        Title="就活情報管理システム" Height="450" Width="800">
-    <Grid>
+        Title="就活情報管理システム" Height="450" Width="800" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:RecruitManagementDataBaseDataSet x:Key="recruitManagDBDataSet"/>
+        <CollectionViewSource x:Key="RecruitViewSource" 
+                              Source="{Binding RecruitTable, 
+            Source={StaticResource recruitManagDBDataSet}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource RecruitViewSource}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -27,7 +33,7 @@
         <Button x:Name="Search" Content="検索" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="10"/>
         <TextBox x:Name="SearchTxt" Grid.Row="1" Grid.Column="2" FontSize="20" Margin="10" />
         <Button x:Name="Sinkituika" Content="新規追加" Grid.Row="1" Grid.Column="4" FontSize="20" Margin="10" Click="Sinkituika_Click"/>
-        <ComboBox x:Name="Activity" Grid.Row="2" Grid.Column="1" Margin="10" />
+        <ComboBox x:Name="Activity" Grid.Row="2" Grid.Column="1" Margin="10,10,10,56" />
         <GroupBox Grid.Row="2" Grid.Column="2">
             <StackPanel>
                 <CheckBox x:Name="Briefing" Content="説明会" FontSize="15" />
@@ -38,8 +44,24 @@
             </StackPanel>
 
         </GroupBox>
-        <DataGrid x:Name="Itiran" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5"/>
-        <Button x:Name="Edit" Content="編集" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="2"/>
+        <DataGrid x:Name="Itiran" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" 
+                  SelectionChanged="Itiran_SelectionChanged"
+                  AutoGenerateColumns="False" 
+                  EnableRowVirtualization="True" 
+                  ItemsSource="{Binding}"
+                  RowDetailsVisibilityMode="VisibleWhenSelected"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="就活NoColumns" Binding="{Binding 就活Noコード}" Header="ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="企業名Columns" Binding="{Binding 企業名コード}" Header="企業名" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="活動場所Columns" Binding="{Binding 活動場所コード}" Header="活動場所" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="活動日Columns" Binding="{Binding 活動日コード}" Header="活動日" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="レポート提出期限Columns" Binding="{Binding レポート提出期限コード}" Header="レポート提出期限" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="内容Columns" Binding="{Binding 内容コード}" Header="内容" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="レポート評価Columns" Binding="{Binding レポート評価コード}" Header="レポート評価" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="Edit" Content="編集" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="2" Click="Edit_Click"/>
         <Button x:Name="Torikesi" Content="取消" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="3"/>
         <Button x:Name="Rogout" Content="ログアウト" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="4" Click="Rogout_Click"/>
 

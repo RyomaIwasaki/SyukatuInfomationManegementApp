@@ -5,16 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SyukatuInfomationManegementApp"
         mc:Ignorable="d"
-        Title="新規追加" Height="650" Width="400">
+        Title="新規追加" Height="650" Width="400" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:RecruitManagementDataBaseDataSet x:Key="recruitManagDBDataSet"/>
+        <CollectionViewSource x:Key="RecruitViewSource" 
+                              Source="{Binding RecruitTable, 
+            Source={StaticResource recruitManagDBDataSet}}"/>
+    </Window.Resources>
+
     <Grid Margin="0,0,2,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="54*"/>
             <RowDefinition Height="54*"/>
             <RowDefinition Height="42*"/>
-            <RowDefinition Height="205*"/>
+            <RowDefinition Height="206*"/>
             <RowDefinition Height="49*"/>
-            <RowDefinition Height="36*"/>
-            <RowDefinition Height="111*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="143*"/>
             <RowDefinition Height="68*"/>
 
         </Grid.RowDefinitions>
@@ -24,28 +31,43 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="企業名" Margin="10,10,73,10" FontSize="25"/>
         <TextBox x:Name="MakerName" Grid.Row="0" Margin="128,10,10,10" FontSize="25" Grid.ColumnSpan="2"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="活動場所" Margin="10,10,73,10" FontSize="25"/>
-        <TextBox x:Name="Place" Grid.Row="1" Margin="128,10,10,10" FontSize="25" Grid.ColumnSpan="2"/>
-        <RadioButton x:Name="Online" Content="オンライン" Margin="128,10,10,10" Grid.Row="2" Grid.Column="0" FontSize="20" Grid.ColumnSpan="2"/>
-        <Calendar x:Name="Calender" Grid.Row="3" Grid.Column="0" Margin="10" FontSize="20" Grid.ColumnSpan="2"/>
-        <GroupBox Grid.Row="4" Grid.Column="0">
-            <StackPanel Margin="0,0,-180,0" Orientation="Horizontal">
-                <RadioButton x:Name="Throughout" Content="終日" Margin="10" FontSize="20"/>
-                <RadioButton x:Name="Am" Content=" 午前" Margin="10" FontSize="20"/>
-                <RadioButton x:Name="Pm" Content="午後" Margin="10" FontSize="20"/>
+
+        <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  Header="活動場所" Margin="0,0,0,25" Grid.RowSpan="2">
+            <StackPanel Orientation="Vertical" Margin="0,0,0,-17">
+                <TextBox x:Name="Place" Margin="10" FontSize="20" Height="25"/>
             </StackPanel>
         </GroupBox>
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="種別" HorizontalAlignment="Center" FontSize="25" Margin="72,0,73,0" Width="50" />
-        <GroupBox Grid.Row="6" Grid.Column="0">
-            <StackPanel >
-                <RadioButton x:Name="Session" Content="説明会" FontSize="20"/>
-                <RadioButton x:Name="PaperTest" Content="筆記試験" FontSize="20"/>
-                <RadioButton x:Name="Goudou" Content="合同企業説明会" FontSize="20"/>
-                <RadioButton x:Name="Mensetu" Content="面接" FontSize="20"/>
+
+
+        <GroupBox Header="日付" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="0,17,0,0">
+            <StackPanel>
+                <Calendar x:Name="Calender"  Margin="10" FontSize="20"/>
+
+                <GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,10,0">
+                    <StackPanel x:Name="AMPM" Margin="0,0,-2,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <RadioButton x:Name="Throughout" Content="終日" Margin="10" FontSize="20"/>
+                        <RadioButton x:Name="Am" Content="午前" Margin="10" FontSize="20"/>
+                        <RadioButton x:Name="Pm" Content="午後" Margin="10" FontSize="20"/>
+                    </StackPanel>
+                </GroupBox>
             </StackPanel>
         </GroupBox>
-        <Button x:Name="Return" Grid.Row="7" Grid.Column="0" Content="戻る" FontSize="30" Margin="10" Click="Return_Click"/>
-        <Button x:Name="Register" Grid.Row="7" Grid.Column="1" Content="登録" FontSize="30" Margin="10"/>
+
+
+        <GroupBox Header="種別"  FontSize="20" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="128,0,72,0">
+            <StackPanel x:Name="type" Margin="0,0,-2,0">
+                <RadioButton x:Name="Session" Content="説明会" FontSize="20" IsChecked="False"/>
+                <RadioButton x:Name="PaperTest" Content="筆記試験" FontSize="20" IsChecked="False"/>
+                <RadioButton x:Name="Goudou" Content="合同企業説明会" FontSize="20" IsChecked="False"/>
+                <RadioButton x:Name="Mensetu" Content="面接" FontSize="20" IsChecked="False"/>
+            </StackPanel>
+        </GroupBox>
+
+        <Button x:Name="Return" Grid.Row="7" Grid.Column="0" Content="戻る" FontSize="30" Margin="10"
+                Click="Return_Click"/>
+
+        <Button x:Name="Register" Grid.Row="7" Grid.Column="1" Content="登録" FontSize="30" Margin="10"
+                Click="Register_Click"/>
 
     </Grid>
 </Window>

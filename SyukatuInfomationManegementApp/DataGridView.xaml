@@ -5,13 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SyukatuInfomationManegementApp"
         mc:Ignorable="d"
-        Title="DataGridView" Height="450" Width="800">
+        Title="DataGridView" Height="750" Width="800" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:RecruitManagementDataBaseDataSet x:Key="recruitManagDBDataSet"/>
+        <CollectionViewSource x:Key="RecruitViewSource" 
+                              Source="{Binding RecruitTable, 
+            Source={StaticResource recruitManagDBDataSet}}"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="59*"/>
-            <RowDefinition Height="151*"/>
-            <RowDefinition Height="105*"/>
-            <RowDefinition Height="104*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="137*"/>
+            <RowDefinition Height="137*"/>
+            <RowDefinition Height="137*"/>
+            <RowDefinition Height="44*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -19,7 +26,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="EmployeeName" Text="企業名" Margin="10" FontSize="25"/>
-        
+        <TextBox x:Name="EmployeeName" Margin="10" FontSize="25" TextChanged="EmployeeName_TextChanged"/>
+        <TextBox x:Name="Place" Text="活動場所" Margin="10" FontSize="25" Grid.Row="0" Grid.Column="1"/>
+        <TextBox x:Name="Type" Margin="10" FontSize="25" Grid.Row="0" Grid.Column="2" Text="種別"/>
+        <TextBox Text="当日の内容" Grid.Row="1" Grid.Column="0" Margin="10" FontSize="20" Grid.ColumnSpan="3"/>
+        <TextBox x:Name="Others" Text="その他" Grid.Row="2" Grid.Column="0" Margin="10" FontSize="20" Grid.ColumnSpan="3"/>
+        <TextBox x:Name="TeachersMemo" Text="教師メモ" Grid.Row="3" Grid.Column="0" Margin="10" FontSize="20" Grid.ColumnSpan="3"/>
+        <Button x:Name="Return" Content="戻る" Grid.Row="4" Grid.Column="1" Margin="10" FontSize="20" Click="Return_Click"/>
+        <Button x:Name="Save" Content="保存" Grid.Row="4" Grid.Column="2" Margin="10" FontSize="20" Click="Save_Click"/>
     </Grid>
 </Window>

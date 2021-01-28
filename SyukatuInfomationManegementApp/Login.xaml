@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SyukatuInfomationManegementApp"
         mc:Ignorable="d"
-        Title="就活情報管理アプリ" Height="450" Width="800">
-    <Grid>
+        Title="就活情報管理アプリ" Height="450" Width="800" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:RecruitManagementDataBaseDataSet x:Key="recruitManagDBDataSet"/>
+        <CollectionViewSource x:Key="RecruitViewSource" 
+                              Source="{Binding StudentTable, 
+            Source={StaticResource recruitManagDBDataSet}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource RecruitViewSource}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -18,10 +24,10 @@
             <RowDefinition Height="147*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="ログイン画面" Margin="277,10,171,10" FontSize="40" Grid.ColumnSpan="2"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="学籍番号" Margin="10" FontSize="30"/>
-        <TextBox x:Name="ID" Grid.Row="1" Grid.Column="1" Margin="10" FontSize="30"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="パスワード" Margin="10" FontSize="30"/>
-        <TextBox x:Name="PassWord" Grid.Row="2" Grid.Column="1" Margin="10" FontSize="30"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="学籍番号" Margin="10,10,257,10" FontSize="30"/>
+        <TextBox x:Name="tbID" Grid.Row="1" Margin="170,10,10,10" FontSize="30" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="パスワード" Margin="10,10,257,10" FontSize="30"/>
+        <PasswordBox x:Name="tbPassWord" Grid.Row="2" Margin="170,10,10,10" FontSize="30" Grid.ColumnSpan="2"/>
         <Button Click="Roguinn_Click" x:Name="Roguinn" Content="ログイン" Margin="228,41,239,36" Grid.Row="3" FontSize="30" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

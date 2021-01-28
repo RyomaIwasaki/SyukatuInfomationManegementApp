@@ -23,5 +23,20 @@ namespace SyukatuInfomationManegementApp
         {
             InitializeComponent();
         }
+
+        private void Return_Click(object sender, RoutedEventArgs e) {
+            this.Close();
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e) {
+            
+        }
+
+
+
+
+        private void EmployeeName_TextChanged(object sender, TextChangedEventArgs e) {
+            
+        }
     }
 }
