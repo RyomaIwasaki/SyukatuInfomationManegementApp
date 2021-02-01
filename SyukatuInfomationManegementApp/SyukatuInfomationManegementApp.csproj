@@ -60,6 +60,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RecruitManagementDataBaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="VariableBox.cs" />
     <Page Include="DataGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

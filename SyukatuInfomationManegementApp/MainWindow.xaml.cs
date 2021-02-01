@@ -24,23 +24,24 @@ namespace SyukatuInfomationManegementApp
 
         SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet recruitManagDBDataSet;
         System.Windows.Data.CollectionViewSource recruitViewSource;
-
-        public MainWindow()
+        string gakunum;
+        public void getGakunum(string gakuseki) {
+            gakunum = gakuseki;
+        }
+        int ID = 0;
+        public MainWindow(int id)
         {
             InitializeComponent();
             Window_Lorded();
+            ID = id;
         }
 
         //新規追加ボタンイベントハンドラ
         private void Sinkituika_Click(object sender, RoutedEventArgs e)
         {
-            NewAddShow();
-        }
-
-        private static void NewAddShow()
-        {
-            NewAdd newAdd = new NewAdd(); //新規追加画面インスタンス作成
-            newAdd.ShowDialog(); //表示
+            NewAdd na = new NewAdd(ID);
+            na.Getgakusekinum(gakunum);
+            na.ShowDialog();
         }
 
         private void Rogout_Click(object sender, RoutedEventArgs e)
@@ -59,14 +60,18 @@ namespace SyukatuInfomationManegementApp
             recruitManagDBDataSet = ((SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet)
                 (this.FindResource("recruitManagDBDataSet")));
 
-            // テーブル 商品 にデータを読み込みます。必要に応じてこのコードを変更できます。
-            SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter recruitManagDataSetRecruitTableTableAdapter
-                = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter();
-            recruitManagDataSetRecruitTableTableAdapter.Fill(recruitManagDBDataSet.RecruitTable);
+            //生徒テーブル読込
+            SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.StudentTableTableAdapter StudentTableAdapter
+                = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.StudentTableTableAdapter();
+            StudentTableAdapter.Fill(recruitManagDBDataSet.StudentTable);
 
-            System.Windows.Data.CollectionViewSource RecruitViewSource
-                = ((System.Windows.Data.CollectionViewSource)(this.FindResource("RecruitViewSource")));
-            RecruitViewSource.View.MoveCurrentToFirst();
+            var StudNum = recruitManagDBDataSet.StudentTable.Where
+                (d => d.StudentNumber.ToString().Contains(gakunum)).ToList();
+
+            var StudName = recruitManagDBDataSet.StudentTable.Where
+                (d => d.StudentName.ToString().Contains(gakunum)).ToList();
+
+            
 
         }
 

@@ -27,8 +27,8 @@
             <RowDefinition Height="175*"/>
             <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="学籍番号" FontSize="20" Grid.Row="0" Grid.Column="0"/>
-        <TextBlock Text="氏名" FontSize="20" Grid.Row="0" Grid.Column="1"/>
+        <TextBlock x:Name="tbStudentNumber" Text="学籍番号" FontSize="20" Grid.Row="0" Grid.Column="0"/>
+        <TextBlock x:Name="tbStudentName" Text="氏名" FontSize="20" Grid.Row="0" Grid.Column="1"/>
         <ComboBox FontSize="20" Grid.Row="1" Grid.Column="0" Margin="5" Name="Sort"/>
         <Button x:Name="Search" Content="検索" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="10"/>
         <TextBox x:Name="SearchTxt" Grid.Row="1" Grid.Column="2" FontSize="20" Margin="10" />
@@ -52,13 +52,14 @@
                   RowDetailsVisibilityMode="VisibleWhenSelected"
                   >
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="就活NoColumns" Binding="{Binding 就活Noコード}" Header="ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="企業名Columns" Binding="{Binding 企業名コード}" Header="企業名" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="活動場所Columns" Binding="{Binding 活動場所コード}" Header="活動場所" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="活動日Columns" Binding="{Binding 活動日コード}" Header="活動日" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="レポート提出期限Columns" Binding="{Binding レポート提出期限コード}" Header="レポート提出期限" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="内容Columns" Binding="{Binding 内容コード}" Header="内容" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="レポート評価Columns" Binding="{Binding レポート評価コード}" Header="レポート評価" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="RecruitIDColumns" Binding="{Binding RecruitID}" Header="ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="EmployeeNameColumns" Binding="{Binding EmployeeName}" Header="企業名" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="PlaceColumns" Binding="{Binding Place}" Header="活動場所" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="RecruitDateColumns" Binding="{Binding RecruitDate}" Header="活動日" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="AmpmColumns" Binding="{Binding AMPM}" Header="活動時間" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="DateLimitColumns" Binding="{Binding DateLimit}" Header="レポート提出期限" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="DataContextColumns" Binding="{Binding dateContent}" Header="内容" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="EvaluationColumns" Binding="{Binding Evaluation}" Header="レポート評価" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="Edit" Content="編集" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="2" Click="Edit_Click"/>

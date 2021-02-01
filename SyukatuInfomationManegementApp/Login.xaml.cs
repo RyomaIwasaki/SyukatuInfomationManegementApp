@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
@@ -18,16 +19,19 @@ namespace SyukatuInfomationManegementApp
     /// <summary>
     /// Login.xaml の相互作用ロジック
     /// </summary>
+    /// 
     public partial class Login : Window
     {
         SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet recruitManagDBDataSet;
+        
 
-        public static int gakuban;
-        private int propatygakuban {
-            set { gakuban = int.Parse(tbID.Text); }
-            get { return gakuban; }
+        private static string gakusekiNum { get; set; }
+
+        private static void gakusekiNumClear() {
+            //gakusekiNum = 0;
         }
 
+        public int ID { get; private set; }
         public Login()
         {
             InitializeComponent();
@@ -58,21 +62,25 @@ namespace SyukatuInfomationManegementApp
                 = ((System.Windows.Data.CollectionViewSource)(this.FindResource("RecruitViewSource")));
             RecruitViewSource.View.MoveCurrentToFirst();
 
-            int GakusekiNum = int.Parse(tbID.Text);
+            ID = int.Parse(tbID.Text);
+           
+            var password = tbPassWord.Password;
 
             var data = recruitManagDBDataSet.StudentTable.Where
                 (d => d.StudentNumber.ToString().Contains(tbID.Text)).ToList();
 
             var pass = recruitManagDBDataSet.CourseTable.Where
-                (d => d.PassWord.ToString().Contains(tbPassWord.Password)).ToList();
+                (d => d.PassWord.ToString().Contains(password)).ToList();
 
             if (data.Exists(d => d.StudentNumber.ToString().StartsWith(tbID.Text))) {
                 if (tbID.Text == "") MessageBox.Show("学籍番号を正しく入力してください");
                 else {
                     if (tbPassWord.Password == "") MessageBox.Show("パスワードを正しく入力してください");
                     else {
-                        if (pass.Exists(s => s.PassWord.ToString().StartsWith(tbPassWord.Password))) {
-                            MainWindowShow();
+                        if (pass.Exists(s => s.PassWord.ToString().StartsWith(password))) {
+                            MainWindow main = new MainWindow(ID);
+                            main.getGakunum(ID.ToString());
+                            main.Show(); ;
                             this.Close();
                         }
                         else MessageBox.Show("パスワードを正しく入力してください");
@@ -80,16 +88,7 @@ namespace SyukatuInfomationManegementApp
                 }
             }
             else MessageBox.Show("学籍番号を正しく入力してください");
-
-            int gakuban = int.Parse(tbID.Text);
         }
-
-        private static void MainWindowShow()
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-        }
-
         
     }
 }
