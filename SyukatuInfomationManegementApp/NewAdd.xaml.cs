@@ -20,42 +20,38 @@ namespace SyukatuInfomationManegementApp {
     /// </summary>
     public partial class NewAdd : Window {
         SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet RecruitManagDBDataSet;
-        SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter RecruitTableTableAdapter;
-        SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter RecruitManagDBDataSetStudentTableTableAdapter;
-        string gakusekinum = "";
 
-        public void Getgakusekinum(string gakuban) {
-            gakusekinum = gakuban;
-        }
+        public int ID { get; set; }
 
-        int ID = 0;
+        //就活情報取得
+        SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter
+            RecruitTableAdapter
+                = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter();
 
-        public NewAdd(int id) {
+        public NewAdd() {
             InitializeComponent();
-            ID = id;
         }
 
         private void Return_Click(object sender, RoutedEventArgs e) {
             this.Close();
         }
 
-        private void Register_Click(object sender, RoutedEventArgs e) {
-            
-            var rctDay =  DateTime.Parse(Calender.SelectedDates[0].ToString());
-            var limit = rctDay.AddDays(7);
-
+        private void Register_Click(object sender, RoutedEventArgs e) {  
             try {
-                DataRow newRct = (DataRow)RecruitManagDBDataSet.RecruitTable.NewRow();               
+                var rctDay = DateTime.Parse(DaySelect.SelectedDates[0].ToString());
+                var limit = rctDay.AddDays(7);
+
+                var newRct = RecruitManagDBDataSet.RecruitTable.NewRow();            
 
                 newRct[1] = MakerName.Text;
                 newRct[2] = Place.Text;
                 
-                newRct[5] = ID;
+                newRct[5] = this.ID;
                 newRct[6] = "未編集";
                 newRct[7] = "未編集";
                 newRct[8] = "未編集";
                 newRct[9] = "未編集";
-                newRct[10] = "未確認";
+                newRct[10] = "未提出";
 
                 newRct[4] = rctDay;
                 newRct[11] = limit;
@@ -85,9 +81,10 @@ namespace SyukatuInfomationManegementApp {
 
                 RecruitManagDBDataSet.RecruitTable.Rows.Add(newRct);
 
-                //データベース更新
-                //RecruitTableTableAdapter.Update(RecruitManagDBDataSet.RecruitTable);
-                RecruitManagDBDataSetStudentTableTableAdapter.Update(RecruitManagDBDataSet.RecruitTable);
+                //データベース更新                
+                RecruitTableAdapter.Update(RecruitManagDBDataSet.RecruitTable);
+
+                MessageBox.Show("登録が完了しました。");
             }
             catch (Exception ex) {
                 MessageBox.Show("登録に失敗しました。" + "\n" + ex.Message);
@@ -95,5 +92,15 @@ namespace SyukatuInfomationManegementApp {
 
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            RecruitManagDBDataSet = ((SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet)
+                (this.FindResource("recruitManagDBDataSet")));
+
+
+            RecruitTableAdapter.Fill(RecruitManagDBDataSet.RecruitTable);
+
+
+
+        }
     }
 }

@@ -29,39 +29,53 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="tbStudentNumber" Text="学籍番号" FontSize="20" Grid.Row="0" Grid.Column="0"/>
         <TextBlock x:Name="tbStudentName" Text="氏名" FontSize="20" Grid.Row="0" Grid.Column="1"/>
-        <ComboBox FontSize="20" Grid.Row="1" Grid.Column="0" Margin="5" Name="Sort"/>
+        
+        <Button x:Name="Sinkituika" Content="新規追加" Grid.Row="1" Grid.Column="4" FontSize="20" Margin="10" Click="Sinkituika_Click"/>
+
         <Button x:Name="Search" Content="検索" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="10"/>
         <TextBox x:Name="SearchTxt" Grid.Row="1" Grid.Column="2" FontSize="20" Margin="10" />
-        <Button x:Name="Sinkituika" Content="新規追加" Grid.Row="1" Grid.Column="4" FontSize="20" Margin="10" Click="Sinkituika_Click"/>
-        <ComboBox x:Name="Activity" Grid.Row="2" Grid.Column="1" Margin="10,10,10,56" />
-        <GroupBox Grid.Row="2" Grid.Column="2">
+        
+        <ComboBox FontSize="20" Grid.Row="1" Grid.Column="0" Margin="5" Name="Sort" />
+        <GroupBox Grid.Row="2" Grid.Column="0">
             <StackPanel>
-                <CheckBox x:Name="Briefing" Content="説明会" FontSize="15" />
-                <CheckBox x:Name="Intern" Content="合同企業説明会" FontSize="15"/>
-                <CheckBox x:Name="Mensetu" Content="面接" FontSize="15"/>
-                <CheckBox x:Name="Test" Content="筆記" FontSize="15"/>
-                <CheckBox x:Name="Offer" Content="内定後" FontSize="15"/>
+                <CheckBox x:Name="cbBriefing" Content="説明会" FontSize="15" Checked="cbBriefing_Checked"/>
+                <CheckBox x:Name="cbGousetu" Content="合同企業説明会" FontSize="15" Checked="cbGousetu_Checked"/>
+                <CheckBox x:Name="cbMensetu" Content="面接" FontSize="15" Checked="cbMensetu_Checked"/>
+                <CheckBox x:Name="cbTest" Content="筆記" FontSize="15" Checked="cbTest_Checked"/>
+                <CheckBox x:Name="cbOther" Content="内定後" FontSize="15" Checked="cbOther_Checked"/>
             </StackPanel>
 
         </GroupBox>
-        <DataGrid x:Name="Itiran" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" 
-                  SelectionChanged="Itiran_SelectionChanged"
+        <DataGrid x:Name="dgItiran" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5"                   
                   AutoGenerateColumns="False" 
                   EnableRowVirtualization="True" 
                   ItemsSource="{Binding}"
                   RowDetailsVisibilityMode="VisibleWhenSelected"
+                  SelectionChanged="Itiran_SelectionChanged"
+                  SelectionMode="Single"
                   >
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="RecruitIDColumns" Binding="{Binding RecruitID}" Header="ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="EmployeeNameColumns" Binding="{Binding EmployeeName}" Header="企業名" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="PlaceColumns" Binding="{Binding Place}" Header="活動場所" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="RecruitDateColumns" Binding="{Binding RecruitDate}" Header="活動日" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="AmpmColumns" Binding="{Binding AMPM}" Header="活動時間" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="DateLimitColumns" Binding="{Binding DateLimit}" Header="レポート提出期限" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="DataContextColumns" Binding="{Binding dateContent}" Header="内容" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="EvaluationColumns" Binding="{Binding Evaluation}" Header="レポート評価" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="RecruitIDColumns" Binding="{Binding RecruitID}" Header="ID"
+                                    Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="EmployeeNameColumns" Binding="{Binding EmployeeName}" Header="企業名"
+                                    Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="PlaceColumns" Binding="{Binding Place}" Header="活動場所"
+                                    Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="RecruitDateColumns" Binding="{Binding RecruitDate}" Header="活動日"
+                                    Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="AmpmColumns" Binding="{Binding AMPM}" Header="活動時間"
+                                    Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="TypeColumns" Binding="{Binding Type}" Header="種別"
+                                    Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="DateLimitColumns" Binding="{Binding DateLimit}" Header="レポート提出期限"
+                                    Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="DataContextColumns" Binding="{Binding dateContent}" Header="内容"
+                                    Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="EvaluationColumns" Binding="{Binding Evaluation}" Header="レポート評価"
+                                    Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="Connect" Grid.Row="4" Content="接続" Grid.Column="1" FontSize="20" Margin="10" Click="Connect_Click" />
         <Button x:Name="Edit" Content="編集" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="2" Click="Edit_Click"/>
         <Button x:Name="Torikesi" Content="取消" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="3"/>
         <Button x:Name="Rogout" Content="ログアウト" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="4" Click="Rogout_Click"/>

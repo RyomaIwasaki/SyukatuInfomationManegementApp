@@ -14,49 +14,30 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SyukatuInfomationManegementApp
-{
+namespace SyukatuInfomationManegementApp {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainWindow : Window
-    {
+    public partial class MainWindow : Window {
 
         SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet recruitManagDBDataSet;
         System.Windows.Data.CollectionViewSource recruitViewSource;
-        string gakunum;
-        public void getGakunum(string gakuseki) {
-            gakunum = gakuseki;
-        }
-        int ID = 0;
-        public MainWindow(int id)
-        {
-            InitializeComponent();
-            Window_Lorded();
-            ID = id;
+
+        //Login login = new Login();
+
+        public int ID { get; set; }
+        public string stdname { get; set; }
+
+        public void GetID(int id,string stdname) {
+            //学籍番号表示
+            tbStudentNumber.Text = id.ToString();
+            //生徒名表示
+            tbStudentName.Text = stdname;
         }
 
-        //新規追加ボタンイベントハンドラ
-        private void Sinkituika_Click(object sender, RoutedEventArgs e)
-        {
-            NewAdd na = new NewAdd(ID);
-            na.Getgakusekinum(gakunum);
-            na.ShowDialog();
-        }
+        public MainWindow() {
+            InitializeComponent();           
 
-        private void Rogout_Click(object sender, RoutedEventArgs e)
-        {
-            Loginshow();
-            this.Close();
-        }
-
-        private static void Loginshow()
-        {
-            Login login = new Login();
-            login.Show();
-        }
-
-        private void Window_Lorded() {
             recruitManagDBDataSet = ((SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet)
                 (this.FindResource("recruitManagDBDataSet")));
 
@@ -65,11 +46,32 @@ namespace SyukatuInfomationManegementApp
                 = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.StudentTableTableAdapter();
             StudentTableAdapter.Fill(recruitManagDBDataSet.StudentTable);
 
-            var StudNum = recruitManagDBDataSet.StudentTable.Where
-                (d => d.StudentNumber.ToString().Contains(gakunum)).ToList();
+            
 
-            var StudName = recruitManagDBDataSet.StudentTable.Where
-                (d => d.StudentName.ToString().Contains(gakunum)).ToList();
+            Window_Lorded();
+
+        }
+
+        //新規追加ボタンイベントハンドラ
+        private void Sinkituika_Click(object sender, RoutedEventArgs e) {
+            NewAdd newAdd = new NewAdd();
+
+            newAdd.ID = int.Parse(tbStudentNumber.Text);
+
+            newAdd.ShowDialog();
+        }
+
+        private void Rogout_Click(object sender, RoutedEventArgs e) {
+            Loginshow();
+            this.Close();
+        }
+
+        private static void Loginshow() {
+            Login login = new Login();
+            login.Show();
+        }
+
+        private void Window_Lorded() {
 
             
 
@@ -79,8 +81,114 @@ namespace SyukatuInfomationManegementApp
 
         }
 
+        //編集ボタン
         private void Edit_Click(object sender, RoutedEventArgs e) {
-            DataRowView drv = (DataRowView)recruitViewSource.View.CurrentItem;
+            DataGridView view = new DataGridView();
+            try {
+                //企業情報の取得
+                var drv = (DataRow)dgItiran.SelectedItem;
+
+                //企業情報の受け渡し
+                view.tbEmployeeName.Text = drv[2].ToString();
+                view.tbPlace.Text = drv[3].ToString();
+                view.tbType.Text = drv[4].ToString();
+
+                //データの格納
+                view.RctID = drv[0].ToString();
+                view.RctDate = drv[3].ToString();
+                view.StdNum = tbStudentNumber.Text;
+                view.LimitDate = drv[5].ToString();
+                view.EValu = drv[7].ToString();
+
+                view.tbContext.Text = drv[6].ToString();
+
+                view.ShowDialog();
+            }
+            catch (Exception ex) {
+                MessageBox.Show("表示に失敗しました。" + "\n" + ex.Message);
+            }
+            
+
+        }
+
+        //接続ボタン
+        private void Connect_Click(object sender, RoutedEventArgs e) {
+            recruitManagDBDataSet = ((SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet)
+                (this.FindResource("recruitManagDBDataSet")));
+
+            //リクルートテーブル読込
+            SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter RecruitTableAdapter
+                = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter();
+            RecruitTableAdapter.Fill(recruitManagDBDataSet.RecruitTable);
+
+            var datacont = recruitManagDBDataSet.RecruitTable.Where(
+                d => d.StudenNumber.ToString().Contains(tbStudentNumber.Text)).ToArray();
+
+            dgItiran.DataContext = datacont;
+        }
+
+        //絞り込み
+        private void dgSort() {
+            //リクルートテーブル読込
+            SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter RecruitTableAdapter
+                = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter();
+            RecruitTableAdapter.Fill(recruitManagDBDataSet.RecruitTable);
+
+            var StdSort = recruitManagDBDataSet.RecruitTable.Where(
+                d => d.StudenNumber.ToString().Contains(tbStudentNumber.Text)).ToArray();
+
+            if (cbBriefing.IsChecked == true) {
+                var datacont = StdSort.Where(
+                d => d.Type.ToString().Contains("説明会")).ToArray();
+                dgItiran.DataContext = datacont;
+            }
+            else if (cbGousetu.IsChecked == true) {
+                var datacont = StdSort.Where(
+                d => d.Type.ToString().Contains("合同企業説明会")).ToArray();
+                dgItiran.DataContext = datacont;
+            }
+            else if (cbMensetu.IsChecked == true) {
+                var datacont = StdSort.Where(
+                d => d.Type.ToString().Contains("面接")).ToArray();
+                dgItiran.DataContext = datacont;
+            }
+            else if (cbTest.IsChecked == true) {
+                var datacont = StdSort.Where(
+                d => d.Type.ToString().Contains("筆記")).ToArray();
+                dgItiran.DataContext = datacont;
+            }
+            else if (cbOther.IsChecked == true) {
+                var datacont = StdSort.Where(
+                d => d.Type.ToString().Contains("内定後")).ToArray();
+                dgItiran.DataContext = datacont;
+            }
+
+            
+        }
+
+        //説明会チェックボックスがチェックされている
+        private void cbBriefing_Checked(object sender, RoutedEventArgs e) {
+            dgSort();
+        }
+
+        //合同企業説明会チェックボックスがチェックされている
+        private void cbGousetu_Checked(object sender, RoutedEventArgs e) {
+            dgSort();
+        }
+
+        //面接チェックボックスがチェックされている
+        private void cbMensetu_Checked(object sender, RoutedEventArgs e) {
+            dgSort();
+        }
+
+        //筆記チェックボックスがチェックされている
+        private void cbTest_Checked(object sender, RoutedEventArgs e) {
+            dgSort();
+        }
+
+        //内定後チェックボックスがチェックされている
+        private void cbOther_Checked(object sender, RoutedEventArgs e) {
+            dgSort();
         }
     }
 }
