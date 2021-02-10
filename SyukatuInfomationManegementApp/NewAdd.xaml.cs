@@ -68,6 +68,9 @@ namespace SyukatuInfomationManegementApp {
                 else if (Goudou.IsChecked == true) {
                     newRct[3] = "合同企業説明会";
                 }
+                else if (Naitei.IsChecked == true) {
+                    newRct[3] = "内定後";
+                }
 
                 if (Throughout.IsChecked == true) {
                     newRct[12] = "終日";
@@ -85,6 +88,8 @@ namespace SyukatuInfomationManegementApp {
                 RecruitTableAdapter.Update(RecruitManagDBDataSet.RecruitTable);
 
                 MessageBox.Show("登録が完了しました。");
+                TextClear();
+
             }
             catch (Exception ex) {
                 MessageBox.Show("登録に失敗しました。" + "\n" + ex.Message);
@@ -98,9 +103,37 @@ namespace SyukatuInfomationManegementApp {
 
 
             RecruitTableAdapter.Fill(RecruitManagDBDataSet.RecruitTable);
+        }
 
+        private void TextClear() {
+            MakerName.Text = "";
+            Place.Text = "";
+            DaySelect = null;
+            if (Session.IsChecked == true) {
+                Session.IsChecked = false;
+            }
+            else if (PaperTest.IsChecked == true) {
+                PaperTest.IsChecked = false;
+            }
+            else if (Mensetu.IsChecked == true) {
+                Mensetu.IsChecked = false;
+            }
+            else if (Goudou.IsChecked == true) {
+                Goudou.IsChecked = false;
+            }
+            else if (Naitei.IsChecked == true) {
+                Naitei.IsChecked = false;
+            }
 
-
+            if (Throughout.IsChecked == true) {
+                Throughout.IsChecked = false;
+            }
+            else if (Am.IsChecked == true) {
+                Am.IsChecked = false;
+            }
+            else if (Pm.IsChecked == true) {
+                Pm.IsChecked = false;
+            }
         }
     }
 }

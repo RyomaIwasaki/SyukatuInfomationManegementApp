@@ -56,10 +56,11 @@
 
         <GroupBox Header="種別"  FontSize="20" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="128,0,72,0">
             <StackPanel x:Name="type" Margin="0,0,-2,0">
-                <RadioButton x:Name="Session" Content="説明会" FontSize="20" IsChecked="False" />
-                <RadioButton x:Name="PaperTest" Content="筆記試験" FontSize="20" IsChecked="False" />
-                <RadioButton x:Name="Goudou" Content="合同企業説明会" FontSize="20" IsChecked="False" />
-                <RadioButton x:Name="Mensetu" Content="面接" FontSize="20" IsChecked="False" />
+                <RadioButton x:Name="Session" Content="説明会" FontSize="15" IsChecked="False" />
+                <RadioButton x:Name="PaperTest" Content="筆記試験" FontSize="15" IsChecked="False" />
+                <RadioButton x:Name="Goudou" Content="合同企業説明会" FontSize="15" IsChecked="False" />
+                <RadioButton x:Name="Mensetu" Content="面接" FontSize="15" IsChecked="False" />
+                <RadioButton x:Name="Naitei" Content="内定後" FontSize="15" IsChecked="False" />
             </StackPanel>
         </GroupBox>
 

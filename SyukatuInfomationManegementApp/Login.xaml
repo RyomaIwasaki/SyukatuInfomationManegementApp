@@ -28,6 +28,7 @@
         <TextBox x:Name="tbID" Grid.Row="1" Margin="170,10,10,10" FontSize="30" Grid.ColumnSpan="2"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="パスワード" Margin="10,10,257,10" FontSize="30"/>
         <PasswordBox x:Name="tbPassWord" Grid.Row="2" Margin="170,10,10,10" FontSize="30" Grid.ColumnSpan="2"/>
-        <Button Click="Roguinn_Click" x:Name="Roguinn" Content="ログイン" Margin="228,41,239,36" Grid.Row="3" FontSize="30" Grid.ColumnSpan="2"/>
+        <Button Click="Roguinn_Click" x:Name="Roguinn" Content="ログイン" Margin="228,41,239,36" Grid.Row="3"
+                FontSize="30" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

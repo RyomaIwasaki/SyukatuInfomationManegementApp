@@ -52,6 +52,7 @@ namespace SyukatuInfomationManegementApp {
 
                 edidata[0].dateContent = tbContext.Text;
                 edidata[0].Others = tbOthers.Text;
+                edidata[0].Evaluation = "未確認";
 
                 //DB更新
                 RecruitTableAdapter.Update(recruitManagDBDataSet.RecruitTable);

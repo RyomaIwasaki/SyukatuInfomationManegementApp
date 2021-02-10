@@ -27,16 +27,17 @@
             <RowDefinition Height="175*"/>
             <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="tbStudentNumber" Text="学籍番号" FontSize="20" Grid.Row="0" Grid.Column="0"/>
-        <TextBlock x:Name="tbStudentName" Text="氏名" FontSize="20" Grid.Row="0" Grid.Column="1"/>
+        <TextBlock x:Name="tbStudentNumber"  FontSize="20" Grid.Row="0" Grid.Column="0"/>
+        <TextBlock x:Name="tbStudentName"  FontSize="20" Grid.Row="0" Grid.Column="1"/>
         
         <Button x:Name="Sinkituika" Content="新規追加" Grid.Row="1" Grid.Column="4" FontSize="20" Margin="10" Click="Sinkituika_Click"/>
 
-        <Button x:Name="Search" Content="検索" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="10"/>
-        <TextBox x:Name="SearchTxt" Grid.Row="1" Grid.Column="2" FontSize="20" Margin="10" />
+        <Button x:Name="Search" Content="検索" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="10" Click="Search_Click"/>
         
-        <ComboBox FontSize="20" Grid.Row="1" Grid.Column="0" Margin="5" Name="Sort" />
-        <GroupBox Grid.Row="2" Grid.Column="0">
+        <ComboBox FontSize="15" Grid.Row="1" Grid.Column="0" Margin="5,5,5,10" Name="cbSort">
+            <ComboBoxItem x:Name="notSort" Content="絞り込みなし"/>
+        </ComboBox>
+            <GroupBox Grid.Row="2" Grid.Column="0">
             <StackPanel>
                 <CheckBox x:Name="cbBriefing" Content="説明会" FontSize="15" Checked="cbBriefing_Checked"/>
                 <CheckBox x:Name="cbGousetu" Content="合同企業説明会" FontSize="15" Checked="cbGousetu_Checked"/>
@@ -50,6 +51,7 @@
                   AutoGenerateColumns="False" 
                   EnableRowVirtualization="True" 
                   ItemsSource="{Binding}"
+                  DataContext="{StaticResource RecruitViewSource}"
                   RowDetailsVisibilityMode="VisibleWhenSelected"
                   SelectionChanged="Itiran_SelectionChanged"
                   SelectionMode="Single"
@@ -75,9 +77,9 @@
                                     Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="Connect" Grid.Row="4" Content="接続" Grid.Column="1" FontSize="20" Margin="10" Click="Connect_Click" />
-        <Button x:Name="Edit" Content="編集" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="2" Click="Edit_Click"/>
-        <Button x:Name="Torikesi" Content="取消" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="3"/>
+        <Button x:Name="Connect" Grid.Row="4" Content="接続" Grid.Column="2" FontSize="20" Margin="10" Click="Connect_Click" />
+        <Button x:Name="Edit" Content="編集" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="3" Click="Edit_Click"/>
+        <!--<Button x:Name="Torikesi" Content="取消" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="3"/>-->
         <Button x:Name="Rogout" Content="ログアウト" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="4" Click="Rogout_Click"/>
 
 
