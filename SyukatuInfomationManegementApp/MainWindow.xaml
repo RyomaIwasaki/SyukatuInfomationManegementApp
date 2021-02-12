@@ -11,6 +11,7 @@
         <CollectionViewSource x:Key="RecruitViewSource" 
                               Source="{Binding RecruitTable, 
             Source={StaticResource recruitManagDBDataSet}}"/>
+        <Color x:Key="Color1">#FFEAEAEA</Color>
     </Window.Resources>
     <Grid DataContext="{StaticResource RecruitViewSource}">
         <Grid.ColumnDefinitions>
@@ -27,23 +28,24 @@
             <RowDefinition Height="175*"/>
             <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="tbStudentNumber"  FontSize="20" Grid.Row="0" Grid.Column="0"/>
-        <TextBlock x:Name="tbStudentName"  FontSize="20" Grid.Row="0" Grid.Column="1"/>
-        
-        <Button x:Name="Sinkituika" Content="新規追加" Grid.Row="1" Grid.Column="4" FontSize="20" Margin="10" Click="Sinkituika_Click"/>
+        <TextBlock x:Name="tbStudentNumber"  FontSize="20" Grid.Row="0" Grid.Column="0" Foreground="#FF0B2508"/>
+        <TextBlock x:Name="tbStudentName"  FontSize="20" Grid.Row="0" Grid.Column="1" Foreground="#FF0B2508"/>
 
-        <Button x:Name="Search" Content="検索" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="10" Click="Search_Click"/>
-        
-        <ComboBox FontSize="15" Grid.Row="1" Grid.Column="0" Margin="5,5,5,10" Name="cbSort">
+        <Button x:Name="Sinkituika" Content="新規追加" Grid.Row="1" Grid.Column="4" FontSize="20" Margin="10" Click="Sinkituika_Click" Foreground="White" BorderBrush="White" Background="#FF0F3A0D"/>
+
+        <Button x:Name="Search" Content="検索" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="10" 
+                IsEnabled="False" Click="Search_Click" Foreground="White" BorderBrush="White" Background="#FF0F3A0D"/>
+
+        <ComboBox FontSize="15" Grid.Row="1" Grid.Column="0" Margin="5,5,5,10" Name="cbSort" BorderBrush="{x:Null}" Foreground="#FF4B6E49" Background="{x:Null}">
             <ComboBoxItem x:Name="notSort" Content="絞り込みなし"/>
         </ComboBox>
-            <GroupBox Grid.Row="2" Grid.Column="0">
+        <GroupBox Grid.Row="2" Grid.Column="0" Foreground="#FF0B2508">
             <StackPanel>
-                <CheckBox x:Name="cbBriefing" Content="説明会" FontSize="15" Checked="cbBriefing_Checked"/>
-                <CheckBox x:Name="cbGousetu" Content="合同企業説明会" FontSize="15" Checked="cbGousetu_Checked"/>
-                <CheckBox x:Name="cbMensetu" Content="面接" FontSize="15" Checked="cbMensetu_Checked"/>
-                <CheckBox x:Name="cbTest" Content="筆記" FontSize="15" Checked="cbTest_Checked"/>
-                <CheckBox x:Name="cbOther" Content="内定後" FontSize="15" Checked="cbOther_Checked"/>
+                <CheckBox x:Name="cbBriefing" Content="説明会" FontSize="15" Checked="cbBriefing_Checked" BorderBrush="#FF0B2508" />
+                <CheckBox x:Name="cbGousetu" Content="合同企業説明会" FontSize="15" Checked="cbGousetu_Checked" Foreground="#FF0B2508" BorderBrush="#FF0B2508" />
+                <CheckBox x:Name="cbMensetu" Content="面接" FontSize="15" Checked="cbMensetu_Checked" BorderBrush="#FF0B2508" Foreground="#FF0B2508"/>
+                <CheckBox x:Name="cbTest" Content="筆記" FontSize="15" Checked="cbTest_Checked" Foreground="#FF0F3A0D" BorderBrush="#FF0B2508"/>
+                <CheckBox x:Name="cbOther" Content="内定後" FontSize="15" Checked="cbOther_Checked" Foreground="#FF164211" BorderBrush="#FF0B2508"/>
             </StackPanel>
 
         </GroupBox>
@@ -53,34 +55,33 @@
                   ItemsSource="{Binding}"
                   DataContext="{StaticResource RecruitViewSource}"
                   RowDetailsVisibilityMode="VisibleWhenSelected"
-                  SelectionChanged="Itiran_SelectionChanged"
-                  SelectionMode="Single"
+                  SelectionMode="Single" Foreground="#FF0F3A0D" Background="#FF456C43" HorizontalGridLinesBrush="#FF0B2508" VerticalGridLinesBrush="#FF0B2508"
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="RecruitIDColumns" Binding="{Binding RecruitID}" Header="ID"
                                     Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="EmployeeNameColumns" Binding="{Binding EmployeeName}" Header="企業名"
-                                    Width="SizeToHeader"/>
+                                    Width="auto"/>
                 <DataGridTextColumn x:Name="PlaceColumns" Binding="{Binding Place}" Header="活動場所"
-                                    Width="SizeToHeader"/>
+                                    Width="auto"/>
                 <DataGridTextColumn x:Name="RecruitDateColumns" Binding="{Binding RecruitDate}" Header="活動日"
-                                    Width="SizeToHeader"/>
+                                    Width="auto"/>
                 <DataGridTextColumn x:Name="AmpmColumns" Binding="{Binding AMPM}" Header="活動時間"
-                                    Width="SizeToHeader"/>
+                                    Width="auto"/>
                 <DataGridTextColumn x:Name="TypeColumns" Binding="{Binding Type}" Header="種別"
-                                    Width="SizeToHeader"/>
+                                    Width="auto"/>
                 <DataGridTextColumn x:Name="DateLimitColumns" Binding="{Binding DateLimit}" Header="レポート提出期限"
-                                    Width="SizeToHeader"/>
+                                    Width="auto"/>
                 <DataGridTextColumn x:Name="DataContextColumns" Binding="{Binding dateContent}" Header="内容"
-                                    Width="SizeToHeader"/>
+                                    Width="auto"/>
                 <DataGridTextColumn x:Name="EvaluationColumns" Binding="{Binding Evaluation}" Header="レポート評価"
-                                    Width="SizeToHeader"/>
+                                    Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="Connect" Grid.Row="4" Content="接続" Grid.Column="2" FontSize="20" Margin="10" Click="Connect_Click" />
-        <Button x:Name="Edit" Content="編集" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="3" Click="Edit_Click"/>
+        <Button x:Name="Connect" Grid.Row="4" Content="接続" Grid.Column="2" FontSize="20" Margin="10" Click="Connect_Click" Background="#FF851313" BorderBrush="White" Foreground="White" OpacityMask="#FF611B1B" />
+        <Button x:Name="Edit" Content="編集" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="3" Click="Edit_Click" Background="#FF0F3A0D" Foreground="White" BorderBrush="White"/>
         <!--<Button x:Name="Torikesi" Content="取消" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="3"/>-->
-        <Button x:Name="Rogout" Content="ログアウト" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="4" Click="Rogout_Click"/>
+        <Button x:Name="Rogout" Content="ログアウト" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="4" Click="Rogout_Click" BorderBrush="White" Background="#FF0F3A0D" Foreground="White"/>
 
 
     </Grid>

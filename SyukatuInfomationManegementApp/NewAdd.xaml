@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SyukatuInfomationManegementApp"
         mc:Ignorable="d"
-        Title="新規追加" Height="650" Width="400" ResizeMode="NoResize" Loaded="Window_Loaded">
+        Title="新規追加" Height="650" Width="400" ResizeMode="NoResize" Loaded="Window_Loaded" Background="White">
     <Window.Resources>
         <local:RecruitManagementDataBaseDataSet x:Key="recruitManagDBDataSet"/>
         <CollectionViewSource x:Key="RecruitViewSource" 
@@ -30,7 +30,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="企業名" Margin="10,10,73,10" FontSize="25"/>
-        <TextBox x:Name="MakerName" Grid.Row="0" Margin="128,10,10,10" FontSize="25" Grid.ColumnSpan="2" />
+        <TextBox x:Name="MakerName" Grid.Row="0" Margin="110,10,10,10" FontSize="25" Grid.ColumnSpan="2" />
 
         <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  Header="活動場所" Margin="0,0,0,25" Grid.RowSpan="2">
             <StackPanel Orientation="Vertical" Margin="0,0,0,-17">
@@ -65,10 +65,10 @@
         </GroupBox>
 
         <Button x:Name="Return" Grid.Row="7" Grid.Column="0" Content="戻る" FontSize="30" Margin="10"
-                Click="Return_Click"/>
+                Click="Return_Click" Foreground="#FFFBFAFD" Background="#FF0F3A0D"/>
 
         <Button x:Name="Register" Grid.Row="7" Grid.Column="1" Content="登録" FontSize="30" Margin="10"
-                Click="Register_Click"/>
+                Click="Register_Click" Background="#FF0F3A0D" Foreground="#FFF9F8F8"/>
 
     </Grid>
 </Window>

@@ -105,7 +105,12 @@ namespace SyukatuInfomationManegementApp {
             else {
                 tbTeachersMemo.Text = "";
             }
-            
+
+            //教師が確認してOKだったら保存ボタンをマスク処理する
+
+            if (EValu == "確認済み") {
+                Save.IsEnabled = false;
+            }
 
         }
     }

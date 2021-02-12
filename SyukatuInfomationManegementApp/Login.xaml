@@ -11,6 +11,7 @@
         <CollectionViewSource x:Key="RecruitViewSource" 
                               Source="{Binding StudentTable, 
             Source={StaticResource recruitManagDBDataSet}}"/>
+        <Color x:Key="Color1">#FF4B6E49</Color>
     </Window.Resources>
     <Grid DataContext="{StaticResource RecruitViewSource}">
         <Grid.ColumnDefinitions>
@@ -23,12 +24,17 @@
             <RowDefinition Height="67*"/>
             <RowDefinition Height="147*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="ログイン画面" Margin="277,10,171,10" FontSize="40" Grid.ColumnSpan="2"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="学籍番号" Margin="10,10,257,10" FontSize="30"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="140" VerticalAlignment="Top" Width="794" Grid.ColumnSpan="2">
+            <Border.Background>
+                <SolidColorBrush Color="#FF4B6E49"/>
+            </Border.Background>
+        </Border>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="ログイン画面" Margin="245,30,247,40" FontSize="60" Grid.ColumnSpan="2" Foreground="White" FontFamily="源暎ラテゴ v2"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="学籍番号" Margin="10,10,257,10" FontSize="30" Foreground="#FF4B6E49"/>
         <TextBox x:Name="tbID" Grid.Row="1" Margin="170,10,10,10" FontSize="30" Grid.ColumnSpan="2"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="パスワード" Margin="10,10,257,10" FontSize="30"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="パスワード" Margin="10,10,257,10" FontSize="30" Foreground="#FF4B6E49"/>
         <PasswordBox x:Name="tbPassWord" Grid.Row="2" Margin="170,10,10,10" FontSize="30" Grid.ColumnSpan="2"/>
         <Button Click="Roguinn_Click" x:Name="Roguinn" Content="ログイン" Margin="228,41,239,36" Grid.Row="3"
-                FontSize="30" Grid.ColumnSpan="2"/>
+                FontSize="30" Grid.ColumnSpan="2" Background="#FF4B6E49" BorderBrush="White" Foreground="White" />
     </Grid>
 </Window>

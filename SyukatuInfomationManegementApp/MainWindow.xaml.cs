@@ -82,9 +82,6 @@ namespace SyukatuInfomationManegementApp {
 
         }
 
-        private void Itiran_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
-        }
 
         //編集ボタン
         private void Edit_Click(object sender, RoutedEventArgs e) {
@@ -96,16 +93,16 @@ namespace SyukatuInfomationManegementApp {
                 //企業情報の受け渡し
                 view.tbEmployeeName.Text = drv[1].ToString();
                 view.tbPlace.Text = drv[2].ToString();
-                view.tbType.Text = drv[5].ToString();
+                view.tbType.Text = drv[3].ToString();
 
                 //データの格納
                 view.RctID = drv[0].ToString();
-                view.RctDate = drv[3].ToString();
+                view.RctDate = drv[4].ToString();
                 view.StdNum = tbStudentNumber.Text;
-                view.LimitDate = drv[6].ToString();
-                view.EValu = drv[8].ToString();
+                view.LimitDate = drv[11].ToString();
+                view.EValu = drv[10].ToString();
 
-                view.tbContext.Text = drv[7].ToString();
+                view.tbContext.Text = drv[6].ToString();
 
                 view.ShowDialog();
             }
@@ -139,6 +136,7 @@ namespace SyukatuInfomationManegementApp {
             dgItiran.DataContext = datacont;
 
             Connect.IsEnabled = false;
+            Search.IsEnabled = true;
 
         }
 
