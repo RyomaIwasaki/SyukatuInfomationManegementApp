@@ -35,6 +35,8 @@ namespace SyukatuInfomationManegementApp {
             tbStudentName.Text = stdname;
         }
 
+        
+
         public MainWindow() {
             InitializeComponent();
 
@@ -46,7 +48,12 @@ namespace SyukatuInfomationManegementApp {
                 = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.StudentTableTableAdapter();
             StudentTableAdapter.Fill(recruitManagDBDataSet.StudentTable);
 
-            Window_Lorded();
+            //リクルートテーブル読込
+            SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter RecruitTableAdapter
+                = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter();
+            RecruitTableAdapter.Fill(recruitManagDBDataSet.RecruitTable);
+
+            
         }
 
         //新規追加ボタンイベントハンドラ
@@ -67,21 +74,6 @@ namespace SyukatuInfomationManegementApp {
             Login login = new Login();
             login.Show();
         }
-
-        private void Window_Lorded() {
-
-            //recruitManagDBDataSet = ((SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet)
-            //    (this.FindResource("recruitManagDBDataSet")));
-
-            ////リクルートテーブル読込
-            //SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter RecruitTableAdapter
-            //    = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter();
-
-            //RecruitTableAdapter.Fill(recruitManagDBDataSet.RecruitTable);
-
-
-        }
-
 
         //編集ボタン
         private void Edit_Click(object sender, RoutedEventArgs e) {
@@ -113,32 +105,7 @@ namespace SyukatuInfomationManegementApp {
 
         }
 
-        //接続ボタン
-        private void Connect_Click(object sender, RoutedEventArgs e) {
-            recruitManagDBDataSet = ((SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet)
-                (this.FindResource("recruitManagDBDataSet")));
-
-            //リクルートテーブル読込
-            SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter RecruitTableAdapter
-                = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter();
-            RecruitTableAdapter.Fill(recruitManagDBDataSet.RecruitTable);
-
-            var datacont = recruitManagDBDataSet.RecruitTable.Where(
-                d => d.StudenNumber.ToString().Contains(tbStudentNumber.Text)).ToArray();
-
-            var datacm = recruitManagDBDataSet.RecruitTable.Where(
-                d => d.StudenNumber.ToString().Contains(tbStudentNumber.Text)).Select(s=>s.EmployeeName).Distinct().ToArray();
-
-            foreach (var cmitem in datacm) {
-                cbSort.Items.Add(cmitem.ToString());
-            }
-
-            dgItiran.DataContext = datacont;
-
-            Connect.IsEnabled = false;
-            Search.IsEnabled = true;
-
-        }
+        
 
         //絞り込み
         private void dgSort() {
@@ -233,6 +200,29 @@ namespace SyukatuInfomationManegementApp {
 
 
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            Cbupdate();
+
+            
+            var datacb = recruitManagDBDataSet.RecruitTable.Where(
+                d => d.StudenNumber.ToString().Contains(tbStudentNumber.Text)).Select(s=>s.EmployeeName).Distinct().ToArray();
+
+
+
+            foreach (var cmitem in datacb) {
+                cbSort.Items.Add(cmitem.ToString());
+            }
+
+            
+        }
+
+        private void Cbupdate() {
+            var datacont = recruitManagDBDataSet.RecruitTable.Where(
+                d => d.StudenNumber.ToString().Contains(tbStudentNumber.Text)).ToArray();
+
+            dgItiran.DataContext = datacont;
         }
     }
 }

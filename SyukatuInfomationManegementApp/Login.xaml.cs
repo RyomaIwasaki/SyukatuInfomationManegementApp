@@ -73,6 +73,7 @@ namespace SyukatuInfomationManegementApp {
                             MainWindow main = new MainWindow();
                             //main.ID = data[0].StudentNumber;
                             stdName = data[0].StudentName.ToString();
+                            main.ID = tbID.Text;
                             main.GetID(ID, stdName);
                             main.Show();
                             this.Close();

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SyukatuInfomationManegementApp"
         mc:Ignorable="d"
-        Title="就活情報管理システム" Height="450" Width="800" ResizeMode="NoResize">
+        Title="就活情報管理システム" Height="450" Width="800" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Window.Resources>
         <local:RecruitManagementDataBaseDataSet x:Key="recruitManagDBDataSet"/>
         <CollectionViewSource x:Key="RecruitViewSource" 
@@ -34,7 +34,7 @@
         <Button x:Name="Sinkituika" Content="新規追加" Grid.Row="1" Grid.Column="4" FontSize="20" Margin="10" Click="Sinkituika_Click" Foreground="White" BorderBrush="White" Background="#FF0F3A0D"/>
 
         <Button x:Name="Search" Content="検索" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="10" 
-                IsEnabled="False" Click="Search_Click" Foreground="White" BorderBrush="White" Background="#FF0F3A0D"/>
+                 Click="Search_Click" Foreground="White" BorderBrush="White" Background="#FF0F3A0D"/>
 
         <ComboBox FontSize="15" Grid.Row="1" Grid.Column="0" Margin="5,5,5,10" Name="cbSort" BorderBrush="{x:Null}" Foreground="#FF4B6E49" Background="{x:Null}">
             <ComboBoxItem x:Name="notSort" Content="絞り込みなし"/>
@@ -78,7 +78,6 @@
                                     Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="Connect" Grid.Row="4" Content="接続" Grid.Column="2" FontSize="20" Margin="10" Click="Connect_Click" Background="#FF851313" BorderBrush="White" Foreground="White" OpacityMask="#FF611B1B" />
         <Button x:Name="Edit" Content="編集" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="3" Click="Edit_Click" Background="#FF0F3A0D" Foreground="White" BorderBrush="White"/>
         <!--<Button x:Name="Torikesi" Content="取消" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="3"/>-->
         <Button x:Name="Rogout" Content="ログアウト" FontSize="20" Margin="10" Grid.Row="4" Grid.Column="4" Click="Rogout_Click" BorderBrush="White" Background="#FF0F3A0D" Foreground="White"/>
