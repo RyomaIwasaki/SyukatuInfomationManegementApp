@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SyukatuInfomationManegementApp"
         mc:Ignorable="d"
-        Title="新規追加" Height="650" Width="400" ResizeMode="NoResize" Loaded="Window_Loaded" Background="White">
+        Title="新規追加(学生)" Height="650" Width="400" ResizeMode="NoResize" Loaded="Window_Loaded" Background="White">
     <Window.Resources>
         <local:RecruitManagementDataBaseDataSet x:Key="recruitManagDBDataSet"/>
         <CollectionViewSource x:Key="RecruitViewSource" 
@@ -45,9 +45,9 @@
 
                 <GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,10,0">
                     <StackPanel x:Name="AMPM" Margin="0,0,-2,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <RadioButton x:Name="Throughout" Content="終日" Margin="10" FontSize="20"/>
-                        <RadioButton x:Name="Am" Content="午前" Margin="10" FontSize="20"/>
-                        <RadioButton x:Name="Pm" Content="午後" Margin="10" FontSize="20"/>
+                        <RadioButton x:Name="Throughout" Content="終日" Margin="10" FontSize="20" VerticalContentAlignment="Center"/>
+                        <RadioButton x:Name="Am" Content="午前" Margin="10" FontSize="20" VerticalContentAlignment="Center"/>
+                        <RadioButton x:Name="Pm" Content="午後" Margin="10" FontSize="20" VerticalContentAlignment="Center"/>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
@@ -56,11 +56,11 @@
 
         <GroupBox Header="種別"  FontSize="20" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="128,0,72,0">
             <StackPanel x:Name="type" Margin="0,0,-2,0">
-                <RadioButton x:Name="Session" Content="説明会" FontSize="15" IsChecked="False" />
-                <RadioButton x:Name="PaperTest" Content="筆記試験" FontSize="15" IsChecked="False" />
-                <RadioButton x:Name="Goudou" Content="合同企業説明会" FontSize="15" IsChecked="False" />
-                <RadioButton x:Name="Mensetu" Content="面接" FontSize="15" IsChecked="False" />
-                <RadioButton x:Name="Naitei" Content="内定後" FontSize="15" IsChecked="False" />
+                <RadioButton x:Name="Session" Content="説明会" FontSize="15" IsChecked="False" VerticalContentAlignment="Center"/>
+                <RadioButton x:Name="PaperTest" Content="筆記試験" FontSize="15" IsChecked="False" VerticalContentAlignment="Center"/>
+                <RadioButton x:Name="Goudou" Content="合同企業説明会" FontSize="15" IsChecked="False" VerticalContentAlignment="Center"/>
+                <RadioButton x:Name="Mensetu" Content="面接" FontSize="15" IsChecked="False" VerticalContentAlignment="Center"/>
+                <RadioButton x:Name="Naitei" Content="内定後" FontSize="15" IsChecked="False" VerticalContentAlignment="Center"/>
             </StackPanel>
         </GroupBox>
 

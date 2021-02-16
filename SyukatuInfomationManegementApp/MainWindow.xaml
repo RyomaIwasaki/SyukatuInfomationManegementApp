@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SyukatuInfomationManegementApp"
         mc:Ignorable="d"
-        Title="就活情報管理システム" Height="450" Width="800" ResizeMode="NoResize" Loaded="Window_Loaded">
+        Title="就活情報管理システム(学生)" Height="450" Width="800" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Window.Resources>
         <local:RecruitManagementDataBaseDataSet x:Key="recruitManagDBDataSet"/>
         <CollectionViewSource x:Key="RecruitViewSource" 
@@ -28,8 +28,10 @@
             <RowDefinition Height="175*"/>
             <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="tbStudentNumber"  FontSize="20" Grid.Row="0" Grid.Column="0" Foreground="#FF0B2508"/>
-        <TextBlock x:Name="tbStudentName"  FontSize="20" Grid.Row="0" Grid.Column="1" Foreground="#FF0B2508"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" Text="学籍番号:" RenderTransformOrigin="0.475,0.556"/>
+        <TextBlock x:Name="tbStudentNumber"  FontSize="20" Grid.Row="0" Foreground="#FF0B2508" Grid.ColumnSpan="2" Margin="90,0,0,0"/>
+        <TextBlock Grid.Row="0" Grid.Column="2" FontSize="20" Text="氏名: "/>
+        <TextBlock x:Name="tbStudentName"  FontSize="20" Grid.Row="0" Grid.Column="2" Foreground="#FF0B2508" Grid.ColumnSpan="2" Margin="53,0,0,0"/>
 
         <Button x:Name="Sinkituika" Content="新規追加" Grid.Row="1" Grid.Column="4" FontSize="20" Margin="10" Click="Sinkituika_Click" Foreground="White" BorderBrush="White" Background="#FF0F3A0D"/>
 
@@ -37,15 +39,15 @@
                  Click="Search_Click" Foreground="White" BorderBrush="White" Background="#FF0F3A0D"/>
 
         <ComboBox FontSize="15" Grid.Row="1" Grid.Column="0" Margin="5,5,5,10" Name="cbSort" BorderBrush="{x:Null}" Foreground="#FF4B6E49" Background="{x:Null}">
-            <ComboBoxItem x:Name="notSort" Content="絞り込みなし"/>
+            <ComboBoxItem x:Name="notSort" Content="絞り込みなし" IsSelected="True"/>
         </ComboBox>
         <GroupBox Grid.Row="2" Grid.Column="0" Foreground="#FF0B2508">
             <StackPanel>
-                <CheckBox x:Name="cbBriefing" Content="説明会" FontSize="15" Checked="cbBriefing_Checked" BorderBrush="#FF0B2508" />
-                <CheckBox x:Name="cbGousetu" Content="合同企業説明会" FontSize="15" Checked="cbGousetu_Checked" Foreground="#FF0B2508" BorderBrush="#FF0B2508" />
-                <CheckBox x:Name="cbMensetu" Content="面接" FontSize="15" Checked="cbMensetu_Checked" BorderBrush="#FF0B2508" Foreground="#FF0B2508"/>
-                <CheckBox x:Name="cbTest" Content="筆記" FontSize="15" Checked="cbTest_Checked" Foreground="#FF0F3A0D" BorderBrush="#FF0B2508"/>
-                <CheckBox x:Name="cbOther" Content="内定後" FontSize="15" Checked="cbOther_Checked" Foreground="#FF164211" BorderBrush="#FF0B2508"/>
+                <RadioButton x:Name="rbBriefing" Content="説明会" FontSize="15" Checked="cbBriefing_Checked" BorderBrush="#FF0B2508" VerticalContentAlignment="Center"/>
+                <RadioButton x:Name="rbGousetu" Content="合同企業説明会" FontSize="15" Checked="cbGousetu_Checked" Foreground="#FF0B2508" BorderBrush="#FF0B2508" VerticalContentAlignment="Center"/>
+                <RadioButton x:Name="rbMensetu" Content="面接" FontSize="15" Checked="cbMensetu_Checked" BorderBrush="#FF0B2508" Foreground="#FF0B2508" VerticalContentAlignment="Center"/>
+                <RadioButton x:Name="rbTest" Content="筆記" FontSize="15" Checked="cbTest_Checked" Foreground="#FF0F3A0D" BorderBrush="#FF0B2508" VerticalContentAlignment="Center"/>
+                <RadioButton x:Name="rbOther" Content="内定後" FontSize="15" Checked="cbOther_Checked" Foreground="#FF164211" BorderBrush="#FF0B2508" VerticalContentAlignment="Center"/>
             </StackPanel>
 
         </GroupBox>

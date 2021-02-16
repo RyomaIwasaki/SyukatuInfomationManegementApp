@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SyukatuInfomationManegementApp"
         mc:Ignorable="d"
-        Title="編集" Height="750" Width="800" ResizeMode="NoResize" Loaded="Window_Loaded" Background="#FFFDFDFD">
+        Title="編集(学生)" Height="750" Width="800" ResizeMode="NoResize" Loaded="Window_Loaded" Background="#FFFDFDFD">
     <Window.Resources>
         <local:RecruitManagementDataBaseDataSet x:Key="recruitManagDBDataSet"/>
         <CollectionViewSource x:Key="RecruitViewSource" 

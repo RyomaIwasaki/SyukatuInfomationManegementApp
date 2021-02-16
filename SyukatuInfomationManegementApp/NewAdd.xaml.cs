@@ -91,8 +91,8 @@ namespace SyukatuInfomationManegementApp {
                 TextClear();
 
             }
-            catch (Exception ex) {
-                MessageBox.Show("登録に失敗しました。" + "\n" + ex.Message);
+            catch (Exception) {
+                MessageBox.Show("登録に失敗しました。データを全て入力してください");
             }
 
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,6 +29,8 @@ namespace SyukatuInfomationManegementApp {
         public string ID { get; set; }
         public string stdname { get; set; }
 
+        public Window login;
+
         public void GetID(int id, string stdname) {
             //学籍番号表示
             tbStudentNumber.Text = id.ToString();
@@ -37,8 +40,9 @@ namespace SyukatuInfomationManegementApp {
 
         
 
-        public MainWindow() {
+        public MainWindow(Window login) {
             InitializeComponent();
+            this.login = login;
 
             recruitManagDBDataSet = ((SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet)
                 (this.FindResource("recruitManagDBDataSet")));
@@ -70,9 +74,9 @@ namespace SyukatuInfomationManegementApp {
             this.Close();
         }
 
-        private static void Loginshow() {
-            Login login = new Login();
-            login.Show();
+        private void Loginshow() {
+
+            login.Visibility = Visibility.Visible; //再表示
         }
 
         //編集ボタン
@@ -109,35 +113,31 @@ namespace SyukatuInfomationManegementApp {
 
         //絞り込み
         private void dgSort() {
-            //リクルートテーブル読込
-            SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter RecruitTableAdapter
-                = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter();
-            RecruitTableAdapter.Fill(recruitManagDBDataSet.RecruitTable);
-
+            
             var StdSort = recruitManagDBDataSet.RecruitTable.Where(
                 d => d.StudenNumber.ToString().Contains(tbStudentNumber.Text)).ToArray();
 
-            if (cbBriefing.IsChecked == true) {
+            if (rbBriefing.IsChecked == true) {
                 var datacont = StdSort.Where(
                 d => d.Type.ToString().Contains("説明会")).ToArray();
                 dgItiran.DataContext = datacont;
             }
-            else if (cbGousetu.IsChecked == true) {
+            else if (rbGousetu.IsChecked == true) {
                 var datacont = StdSort.Where(
                 d => d.Type.ToString().Contains("合同企業説明会")).ToArray();
                 dgItiran.DataContext = datacont;
             }
-            else if (cbMensetu.IsChecked == true) {
+            else if (rbMensetu.IsChecked == true) {
                 var datacont = StdSort.Where(
                 d => d.Type.ToString().Contains("面接")).ToArray();
                 dgItiran.DataContext = datacont;
             }
-            else if (cbTest.IsChecked == true) {
+            else if (rbTest.IsChecked == true) {
                 var datacont = StdSort.Where(
                 d => d.Type.ToString().Contains("筆記")).ToArray();
                 dgItiran.DataContext = datacont;
             }
-            else if (cbOther.IsChecked == true) {
+            else if (rbOther.IsChecked == true) {
                 var datacont = StdSort.Where(
                 d => d.Type.ToString().Contains("内定後")).ToArray();
                 dgItiran.DataContext = datacont;
@@ -173,14 +173,7 @@ namespace SyukatuInfomationManegementApp {
 
         //検索ボタン
         private void Search_Click(object sender, RoutedEventArgs e) {
-            recruitManagDBDataSet = ((SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet)
-                (this.FindResource("recruitManagDBDataSet")));
-
-            //リクルートテーブル読込
-            SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter RecruitTableAdapter
-                = new SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSetTableAdapters.RecruitTableTableAdapter();
-            RecruitTableAdapter.Fill(recruitManagDBDataSet.RecruitTable);
-
+            
             if (cbSort.Text != "絞り込みなし") {
                 var cbEmpdata = recruitManagDBDataSet.RecruitTable.Where(
                 d => d.EmployeeName.ToString().Contains(cbSort.Text)).ToArray();
@@ -198,7 +191,21 @@ namespace SyukatuInfomationManegementApp {
                     d => d.StudenNumber.ToString().Contains(tbStudentNumber.Text));
             }
 
-
+            if (rbBriefing.IsChecked == true) {
+                rbBriefing.IsChecked = false;
+            }
+            else if (rbGousetu.IsChecked == true) {
+                rbGousetu.IsChecked = false;
+            }
+            else if (rbMensetu.IsChecked == true) {
+                rbMensetu.IsChecked = false;
+            }
+            else if (rbTest.IsChecked == true) {
+                rbTest.IsChecked = false;
+            }
+            else if (rbOther.IsChecked == true) {
+                rbOther.IsChecked = false;
+            }
 
         }
 
@@ -215,7 +222,7 @@ namespace SyukatuInfomationManegementApp {
                 cbSort.Items.Add(cmitem.ToString());
             }
 
-            
+            cbSort.SelectedItem = "絞り込みなし";
         }
 
         private void Cbupdate() {

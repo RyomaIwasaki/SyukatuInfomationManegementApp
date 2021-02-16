@@ -30,10 +30,6 @@ namespace SyukatuInfomationManegementApp {
 
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e) {
-
-        }
-
         private void Roguinn_Click(object sender, RoutedEventArgs e) {
             recruitManagDBDataSet = ((SyukatuInfomationManegementApp.RecruitManagementDataBaseDataSet)
                 (this.FindResource("recruitManagDBDataSet")));
@@ -52,38 +48,42 @@ namespace SyukatuInfomationManegementApp {
                 = ((System.Windows.Data.CollectionViewSource)(this.FindResource("RecruitViewSource")));
             RecruitViewSource.View.MoveCurrentToFirst();
 
-            ID = int.Parse(tbID.Text);
+            if (tbID.Text != "" || tbPassWord.Password != "") {
+                ID = int.Parse(tbID.Text);
 
-            var password = tbPassWord.Password;
+                var password = tbPassWord.Password;
 
-            //学生情報の抽出
-            var data = recruitManagDBDataSet.StudentTable.Where
-                (d => d.StudentNumber.ToString().Contains(tbID.Text)).ToList();
+                //学生情報の抽出
+                var data = recruitManagDBDataSet.StudentTable.Where
+                    (d => d.StudentNumber.ToString().Contains(tbID.Text)).ToList();
 
-            //コースのパスワードを抽出
-            var pass = recruitManagDBDataSet.CourseTable.Where
-                (d => d.PassWord.ToString().Contains(password)).ToList();
+                //コースのパスワードを抽出
+                var pass = recruitManagDBDataSet.CourseTable.Where
+                    (d => d.PassWord.ToString().Contains(password)).ToList();
 
-            if (data.Exists(d => d.StudentNumber.ToString().StartsWith(tbID.Text))) {
-                if (tbID.Text == "") MessageBox.Show("学籍番号を正しく入力してください");
-                else {
-                    if (tbPassWord.Password == "") MessageBox.Show("パスワードを正しく入力してください");
+                if (data.Exists(d => d.StudentNumber.ToString().StartsWith(tbID.Text))) {
+                    if (tbID.Text == "") MessageBox.Show("学籍番号を正しく入力してください");
                     else {
-                        if (pass.Exists(s => s.PassWord.ToString().StartsWith(password))) {
-                            MainWindow main = new MainWindow();
-                            //main.ID = data[0].StudentNumber;
-                            stdName = data[0].StudentName.ToString();
-                            main.ID = tbID.Text;
-                            main.GetID(ID, stdName);
-                            main.Show();
-                            this.Close();
+                        if (tbPassWord.Password == "") MessageBox.Show("パスワードを正しく入力してください");
+                        else {
+                            if (pass.Exists(s => s.PassWord.ToString().StartsWith(password))) {
+                                MainWindow main = new MainWindow(this);                      
+                                stdName = data[0].StudentName.ToString();
+                                main.ID = tbID.Text;
+                                main.GetID(ID, stdName);                    
+                                this.Visibility = Visibility.Hidden; //非表示
+                                main.ShowDialog();
+                            }
+                            else MessageBox.Show("パスワードを正しく入力してください");
                         }
-                        else MessageBox.Show("パスワードを正しく入力してください");
                     }
                 }
+                else MessageBox.Show("学籍番号を正しく入力してください");
             }
-            else MessageBox.Show("学籍番号を正しく入力してください");
-        }
+            else {
+                MessageBox.Show("学籍番号とパスワードを入力してください");
+            }
 
+        }
     }
 }

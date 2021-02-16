@@ -34,8 +34,6 @@ namespace SyukatuInfomationManegementApp {
 
         public DataGridView() {
             InitializeComponent();
-            MainWindow main = new MainWindow();
-
         }
 
         private void Return_Click(object sender, RoutedEventArgs e) {
